@@ -1,12 +1,9 @@
-import { lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-const Home = lazy(()=> import("./pages/Home"));
-const Login = lazy(()=> import("./pages/Login"));
-const Chat = lazy(()=> import("./pages/Chat"));
-const Groups = lazy(()=> import("./pages/Groups"));
-const SignUp = lazy(()=> import("./pages/SignUp"));
-
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Chat from './pages/Chat';
+import Groups from './pages/Groups';
+import SignUp from './pages/SignUp';
 
 
 const App = () => {
@@ -25,7 +22,7 @@ const App = () => {
         </Routes>
       </Router>
 
-
+      
     </>
   )
 }
