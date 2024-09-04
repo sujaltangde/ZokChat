@@ -1,4 +1,5 @@
 import React from 'react'
+import AppLayout from '../components/layout/AppLayout'
 
 const Chat: React.FC = () => {
   return (
@@ -6,4 +7,4 @@ const Chat: React.FC = () => {
   )
 }
 
-export default Chat
+export default AppLayout()(Chat)
