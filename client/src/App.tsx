@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Chat from './pages/Chat';
-import Groups from './pages/Groups';
-import SignUp from './pages/SignUp';
+import { lazy, Suspense } from 'react';
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const Chat = lazy(() => import('./pages/Chat'));
+const Groups = lazy(() => import('./pages/Groups'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import NotFound from './pages/NotFound';
+import Loader from './components/shared/Loader';
 
 
 const App = () => {
@@ -18,21 +20,26 @@ const App = () => {
     <>
 
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Home/></ProtectedRoute>} />
-          <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={"/"}><Login/></ProtectedRoute>} />
-          <Route path="/signup" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={"/"}><SignUp/></ProtectedRoute>} />
-          
-          <Route path="/chat/:chatId" element={<Chat />} />
-          <Route path="/groups" element={<Groups />} />
+        <Suspense fallback={<Loader />}>
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<ProtectedRoute isAuthenticated={isAuthenticated}><Home /></ProtectedRoute>} />
+            <Route path="/login" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={"/"}><Login /></ProtectedRoute>} />
+            <Route path="/signup" element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={"/"}><SignUp /></ProtectedRoute>} />
+
+            <Route path="/chat/:chatId" element={<Chat />} />
+            <Route path="/groups" element={<Groups />} />
 
 
-          <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
 
 
-        </Routes>
+          </Routes>
+        </Suspense>
       </Router>
+
+
 
 
     </>

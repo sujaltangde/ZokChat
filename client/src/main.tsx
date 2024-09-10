@@ -6,10 +6,13 @@ import { CssBaseline } from '@mui/material';
 import { HelmetProvider } from 'react-helmet-async';
 
 createRoot(document.getElementById('root')!).render(
-  
-    <HelmetProvider>
-      <CssBaseline />
+
+  <HelmetProvider>
+    <CssBaseline />
+    {/* <div onContextMenu={e => e.preventDefault()}> */}
+    <div>
       <App />
-      </HelmetProvider >
-  
+    </div>
+  </HelmetProvider >
+
 )
